@@ -4,7 +4,7 @@
 namespace CruzCivieta\TennisGame;
 
 
-class DeuceRule implements ScoreRule
+class DeuceScore implements ScoreRule
 {
     const DEFAULT_SCORE = "Deuce";
     const DEUCE_SCORES = [
