@@ -39,11 +39,17 @@ class ScoreBoard
 
     public function getScore()
     {
-        $rule = current(array_filter($this->scoreRules, function($rule) {
+        return $this->findRule()->getScore($this->local, $this->visitor);
+    }
+
+    /**
+     * @return mixed
+     */
+    private function findRule()
+    {
+        return current(array_filter($this->scoreRules, function (ScoreRule $rule) {
             return $rule->isSupport($this->local, $this->visitor);
         }));
-
-        return $rule->getScore($this->local, $this->visitor);
     }
 
 }
