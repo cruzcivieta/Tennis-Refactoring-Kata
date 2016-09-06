@@ -4,6 +4,13 @@ namespace CruzCivieta\TennisGame;
 
 class TennisGame1 implements TennisGame
 {
+    const DEUCE = "Deuce";
+    const SCORES = [
+        0 => 'Love-All',
+        1 => 'Fifteen-All',
+        2 => 'Thirty-All',
+    ];
+
     private $m_score1 = 0;
     private $m_score2 = 0;
     private $player1Name = '';
@@ -72,17 +79,11 @@ class TennisGame1 implements TennisGame
      */
     private function convertIntoStringPoint()
     {
-        $scores = [
-            0 => 'Love-All',
-            1 => 'Fifteen-All',
-            2 => 'Thirty-All',
-        ];
-
-        if (!array_key_exists($this->m_score1, $scores)) {
-            return "Deuce";
+        if (!array_key_exists($this->m_score1, static::SCORES)) {
+            return static::DEUCE;
         }
 
-        return $scores[$this->m_score1];
+        return static::SCORES[$this->m_score1];
     }
 }
 
