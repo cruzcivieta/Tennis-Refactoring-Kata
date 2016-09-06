@@ -16,15 +16,15 @@ class TennisGame1 implements TennisGame
     private $player1Name = '';
     private $player2Name = '';
 
-    public function __construct($player1Name, $player2Name)
+    public function __construct($playerOneName, $playerSecondName)
     {
-        $this->player1Name = $player1Name;
-        $this->player2Name = $player2Name;
+        $this->player1Name = new Player($playerOneName);
+        $this->player2Name = new Player($playerSecondName);
     }
 
     public function wonPoint($playerName)
     {
-        if ('player1' == $playerName) {
+        if ($this->isPlayerOne($playerName)) {
             $this->m_score1++;
         } else {
             $this->m_score2++;
@@ -33,7 +33,6 @@ class TennisGame1 implements TennisGame
 
     public function getScore()
     {
-        $score = "";
         if ($this->isDeuce()) {
             $score = $this->convertIntoDeuceScore();
         } elseif ($this->hasMoreFourPoint()) {
@@ -42,8 +41,9 @@ class TennisGame1 implements TennisGame
             $scorePlayerOne = $this->getPoints($this->m_score1);
             $scorePlayerTwo = $this->getPoints($this->m_score2);
 
-            return $scorePlayerOne . '-' . $scorePlayerTwo;
+            $score = $scorePlayerOne . '-' . $scorePlayerTwo;
         }
+
         return $score;
     }
 
@@ -111,6 +111,15 @@ class TennisGame1 implements TennisGame
         ];
 
         return $points[$tempScore];
+    }
+
+    /**
+     * @param $playerName
+     * @return bool
+     */
+    private function isPlayerOne($playerName)
+    {
+        return 'player1' == $playerName;
     }
 }
 
