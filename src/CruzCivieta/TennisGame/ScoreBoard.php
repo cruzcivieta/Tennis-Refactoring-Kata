@@ -33,7 +33,8 @@ class ScoreBoard
         } elseif ($this->hasMoreFourPoint()) {
             $score = $this->getScoreForFourOrMorePoints();
         } else {
-            $score = $this->getNormalScore();
+            $rule = new NormalScore();
+            $score = $rule->getScore($this->local, $this->visitor);
         }
 
         return $score;
@@ -87,33 +88,5 @@ class ScoreBoard
             $score = "Win for player2";
             return $score;
         }
-    }
-
-    /**
-     * @param $tempScore
-     * @return string
-     */
-    private function getPoints($tempScore)
-    {
-        $points = [
-            0 => 'Love',
-            1 => 'Fifteen',
-            2 => 'Thirty',
-            3 => 'Forty',
-        ];
-
-        return $points[$tempScore];
-    }
-
-    /**
-     * @return string
-     */
-    private function getNormalScore()
-    {
-        $scorePlayerOne = $this->getPoints($this->local);
-        $scorePlayerTwo = $this->getPoints($this->visitor);
-
-        $score = $scorePlayerOne . '-' . $scorePlayerTwo;
-        return $score;
     }
 }
