@@ -34,7 +34,7 @@ class TennisGame1 implements TennisGame
     public function getScore()
     {
         $score = "";
-        if ($this->m_score1 == $this->m_score2) {
+        if ($this->isDeuce()) {
             $score = $this->convertIntoDeuceScore();
         } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
             $minusResult = $this->m_score1 - $this->m_score2;
@@ -84,6 +84,14 @@ class TennisGame1 implements TennisGame
         }
 
         return static::DEUCE_SCORES[$this->m_score1];
+    }
+
+    /**
+     * @return bool
+     */
+    private function isDeuce()
+    {
+        return $this->m_score1 == $this->m_score2;
     }
 }
 
