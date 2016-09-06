@@ -39,15 +39,10 @@ class TennisGame1 implements TennisGame
         } elseif ($this->hasMoreFourPoint()) {
             $score = $this->getScoreForFourOrMorePoints();
         } else {
-            for ($i = 1; $i < 3; $i++) {
-                if ($i == 1) {
-                    $tempScore = $this->m_score1;
-                } else {
-                    $score .= "-";
-                    $tempScore = $this->m_score2;
-                }
-                $score .= $this->getPoints($tempScore, $score);
-            }
+            $scorePlayerOne = $this->getPoints($this->m_score1);
+            $scorePlayerTwo = $this->getPoints($this->m_score2);
+
+            return $scorePlayerOne . '-' . $scorePlayerTwo;
         }
         return $score;
     }
