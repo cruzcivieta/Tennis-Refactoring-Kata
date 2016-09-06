@@ -10,7 +10,7 @@ class ScoreBoard
     private $visitor = 0;
 
     /**
-     * @var ScoreRule[]
+     * @var ScoreCollection
      */
     private $scoreRules;
 
@@ -19,13 +19,8 @@ class ScoreBoard
      */
     public function __construct()
     {
-        $this->scoreRules = [
-            new DeuceScore(),
-            new AdvantageScore(),
-            new NormalScore(),
-        ];
+        $this->scoreRules = new TennisScoreCollection();
     }
-
 
     public function pointForLocal()
     {
@@ -39,17 +34,9 @@ class ScoreBoard
 
     public function getScore()
     {
-        return $this->findRule()->getScore($this->local, $this->visitor);
-    }
+        $rule = $this->scoreRules
+            ->findRule($this->local, $this->visitor);
 
-    /**
-     * @return mixed
-     */
-    private function findRule()
-    {
-        return current(array_filter($this->scoreRules, function (ScoreRule $rule) {
-            return $rule->isSupport($this->local, $this->visitor);
-        }));
+        return $rule->getScore($this->local, $this->visitor);
     }
-
 }
