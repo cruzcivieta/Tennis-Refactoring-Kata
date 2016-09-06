@@ -16,4 +16,9 @@ class Player
     {
         $this->name = $name;
     }
+
+    public function isYou($playerName)
+    {
+        return $this->name === $playerName;
+    }
 }

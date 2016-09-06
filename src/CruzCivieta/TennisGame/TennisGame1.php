@@ -13,18 +13,26 @@ class TennisGame1 implements TennisGame
 
     private $m_score1 = 0;
     private $m_score2 = 0;
-    private $player1Name = '';
-    private $player2Name = '';
+
+    /**
+     * @var Player
+     */
+    private $localPlayer;
+
+    /**
+     * @var Player
+     */
+    private $visitorPlayer;
 
     public function __construct($playerOneName, $playerSecondName)
     {
-        $this->player1Name = new Player($playerOneName);
-        $this->player2Name = new Player($playerSecondName);
+        $this->localPlayer = new Player($playerOneName);
+        $this->visitorPlayer = new Player($playerSecondName);
     }
 
     public function wonPoint($playerName)
     {
-        if ($this->isPlayerOne($playerName)) {
+        if ($this->localPlayer->isYou($playerName)) {
             $this->m_score1++;
         } else {
             $this->m_score2++;
@@ -111,15 +119,6 @@ class TennisGame1 implements TennisGame
         ];
 
         return $points[$tempScore];
-    }
-
-    /**
-     * @param $playerName
-     * @return bool
-     */
-    private function isPlayerOne($playerName)
-    {
-        return 'player1' == $playerName;
     }
 }
 
