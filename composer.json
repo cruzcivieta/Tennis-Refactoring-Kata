@@ -1,0 +1,22 @@
+{
+    "name": "cruzcivieta/tennis-refactoring-kata-php",
+    "description": "Tennis Refactoring Kata",
+    "license": "MIT",
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CruzCivieta\\": [
+                "src/CruzCivieta",
+                "tests/CruzCivieta"
+            ]
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "tests": "bin/phpunit"
+    }
+}
