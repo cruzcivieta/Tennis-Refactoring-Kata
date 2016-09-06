@@ -5,7 +5,7 @@ namespace CruzCivieta\TennisGame;
 class TennisGame1 implements TennisGame
 {
     const DEUCE = "Deuce";
-    const SCORES = [
+    const DEUCE_SCORES = [
         0 => 'Love-All',
         1 => 'Fifteen-All',
         2 => 'Thirty-All',
@@ -35,7 +35,7 @@ class TennisGame1 implements TennisGame
     {
         $score = "";
         if ($this->m_score1 == $this->m_score2) {
-            $score = $this->convertIntoStringPoint();
+            $score = $this->convertIntoDeuceScore();
         } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
             $minusResult = $this->m_score1 - $this->m_score2;
             if ($minusResult == 1) {
@@ -77,13 +77,13 @@ class TennisGame1 implements TennisGame
     /**
      * @return string
      */
-    private function convertIntoStringPoint()
+    private function convertIntoDeuceScore()
     {
-        if (!array_key_exists($this->m_score1, static::SCORES)) {
+        if (!array_key_exists($this->m_score1, static::DEUCE_SCORES)) {
             return static::DEUCE;
         }
 
-        return static::SCORES[$this->m_score1];
+        return static::DEUCE_SCORES[$this->m_score1];
     }
 }
 
