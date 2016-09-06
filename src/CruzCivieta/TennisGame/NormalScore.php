@@ -6,6 +6,13 @@ namespace CruzCivieta\TennisGame;
 
 class NormalScore implements ScoreRule
 {
+    const POINT_RULES = [
+        0 => 'Love',
+        1 => 'Fifteen',
+        2 => 'Thirty',
+        3 => 'Forty',
+    ];
+
     /**
      * @param $localPoint int
      * @param $visitorPoint int
@@ -23,12 +30,10 @@ class NormalScore implements ScoreRule
      */
     public function getScore($localPoint, $visitorPoint)
     {
-        $scorePlayerOne = $this->getPoints($localPoint);
-        $scorePlayerTwo = $this->getPoints($visitorPoint);
-
-        $score = $scorePlayerOne . '-' . $scorePlayerTwo;
-
-        return $score;
+        return $this->format(
+            $this->getPoints($localPoint),
+            $this->getPoints($visitorPoint)
+        );
     }
 
     /**
@@ -37,13 +42,16 @@ class NormalScore implements ScoreRule
      */
     private function getPoints($tempScore)
     {
-        $points = [
-            0 => 'Love',
-            1 => 'Fifteen',
-            2 => 'Thirty',
-            3 => 'Forty',
-        ];
+        return static::POINT_RULES[$tempScore];
+    }
 
-        return $points[$tempScore];
+    /**
+     * @param $scorePlayerOne
+     * @param $scorePlayerTwo
+     * @return string
+     */
+    private function format($scorePlayerOne, $scorePlayerTwo)
+    {
+        return $scorePlayerOne . '-' . $scorePlayerTwo;
     }
 }
