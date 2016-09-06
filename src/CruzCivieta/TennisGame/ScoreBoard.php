@@ -31,7 +31,8 @@ class ScoreBoard
         if ($this->isDeuce()) {
             $score = $this->convertIntoDeuceScore();
         } elseif ($this->hasMoreFourPoint()) {
-            $score = $this->getScoreForFourOrMorePoints();
+            $rule = new AdvantageScore();
+            $score = $rule->getScore($this->local, $this->visitor);
         } else {
             $rule = new NormalScore();
             $score = $rule->getScore($this->local, $this->visitor);
@@ -68,25 +69,4 @@ class ScoreBoard
         return $this->local >= 4 || $this->visitor >= 4;
     }
 
-    /**
-     * @return string
-     */
-    private function getScoreForFourOrMorePoints()
-    {
-        $minusResult = $this->local - $this->visitor;
-
-        if ($minusResult == 1) {
-            $score = "Advantage player1";
-            return $score;
-        } elseif ($minusResult == -1) {
-            $score = "Advantage player2";
-            return $score;
-        } elseif ($minusResult >= 2) {
-            $score = "Win for player1";
-            return $score;
-        } else {
-            $score = "Win for player2";
-            return $score;
-        }
-    }
 }
