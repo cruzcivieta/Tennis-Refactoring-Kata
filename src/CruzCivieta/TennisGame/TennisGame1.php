@@ -29,16 +29,24 @@ class TennisGame1 implements TennisGame
 
     public function wonPoint($playerName)
     {
-        if ($this->localPlayer->isYou($playerName)) {
-            $this->scoreBoard->pointForLocal();
-        } else {
-            $this->scoreBoard->pointForVisitor();
-        }
+        $this->givePoint($playerName);
     }
 
     public function getScore()
     {
         return $this->scoreBoard->getScore();
+    }
+
+    /**
+     * @param $playerName
+     */
+    private function givePoint($playerName)
+    {
+        if ($this->localPlayer->isYou($playerName)) {
+            $this->scoreBoard->pointForLocal();
+        } else {
+            $this->scoreBoard->pointForVisitor();
+        }
     }
 }
 
