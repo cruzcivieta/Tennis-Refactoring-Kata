@@ -72,21 +72,17 @@ class TennisGame1 implements TennisGame
      */
     private function convertIntoStringPoint()
     {
-        switch ($this->m_score1) {
-            case 0:
-                $score = "Love-All";
-                break;
-            case 1:
-                $score = "Fifteen-All";
-                break;
-            case 2:
-                $score = "Thirty-All";
-                break;
-            default:
-                $score = "Deuce";
-                break;
+        $scores = [
+            0 => 'Love-All',
+            1 => 'Fifteen-All',
+            2 => 'Thirty-All',
+        ];
+
+        if (!array_key_exists($this->m_score1, $scores)) {
+            return "Deuce";
         }
-        return $score;
+
+        return $scores[$this->m_score1];
     }
 }
 
