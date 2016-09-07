@@ -6,6 +6,9 @@ namespace CruzCivieta\TennisGame;
 
 class AdvantageScore implements ScoreRule
 {
+    const ADVANTAGE_PLAYER_1 = "Advantage player1";
+    const ADVANTAGE_PLAYER_2 = "Advantage player2";
+
     /**
      * @param $localPoint int
      * @param $visitorPoint int
@@ -23,20 +26,13 @@ class AdvantageScore implements ScoreRule
      */
     public function getScore($localPoint, $visitorPoint)
     {
-        $minusResult = $localPoint - $visitorPoint;
+        return $this->isAdvantageForLocalPlayer($localPoint, $visitorPoint)
+            ? static::ADVANTAGE_PLAYER_1
+            : static::ADVANTAGE_PLAYER_2;
+    }
 
-        if ($minusResult == 1) {
-            $score = "Advantage player1";
-            return $score;
-        } elseif ($minusResult == -1) {
-            $score = "Advantage player2";
-            return $score;
-        } elseif ($minusResult >= 2) {
-            $score = "Win for player1";
-            return $score;
-        } else {
-            $score = "Win for player2";
-            return $score;
-        }
+    private function isAdvantageForLocalPlayer($localPoint, $visitorPoint)
+    {
+        return ($localPoint - $visitorPoint) === 1;
     }
 }

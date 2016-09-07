@@ -18,6 +18,7 @@ class TennisScoreCollection implements ScoreCollection
     {
         $this->scoreRules = [
             new DeuceScore(),
+            new WinGameScore(),
             new AdvantageScore(),
             new NormalScore(),
         ];
