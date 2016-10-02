@@ -19,4 +19,5 @@ interface ScoreRule
      * @return string
      */
     public function getScore($localPoint, $visitorPoint);
+
 }
